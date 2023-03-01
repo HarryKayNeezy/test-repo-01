@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
      inputs:
       workflow_02:
-        description: 'ًWorkflow 2 which will be triggered'
+        description: 'Workflow 2 which will be triggered'
         required: true
         default: 'workflow_02'
 
