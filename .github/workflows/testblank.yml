@@ -8,7 +8,7 @@ jobs:
       matrix:
         repo: ['test-repo-01', 'test-repo-02']
     steps:
-    - uses: passeidireto/trigger-external-workflow-action@main
+    - uses: HarryKayNeezy/trigger-external-workflow-action@main
       env:
         PAYLOAD_REBUILD: "false"
         PAYLOAD_BRANCH: ${{github.ref}}
