@@ -6,7 +6,7 @@ jobs:
     name: "Notify about update"
     strategy:
       matrix:
-        repo: ['test-repo-01', 'test-repo-2']
+        repo: ['test-repo-01', 'test-repo-02']
     steps:
     - uses: passeidireto/trigger-external-workflow-action@main
       env:
