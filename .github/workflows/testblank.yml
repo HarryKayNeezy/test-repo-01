@@ -16,7 +16,7 @@ on:
       workflow2_repo_github:
         description: 'repo-name'
         required: true
-        default: 'test-repo-2' 
+        default: 'test-repo-02' 
 
 jobs:
   build:
