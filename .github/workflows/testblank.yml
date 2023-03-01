@@ -1,17 +1,18 @@
-name: Trigger Deploy
-
-on:
-  push:
-    branches:
-      - master
-
+on: [push, workflow_dispatch]
+name: 'Trigger new update'
 jobs:
-  deploy:
+  trigger:
     runs-on: ubuntu-latest
+    name: "Notify about update"
+    strategy:
+      matrix:
+        repo: ['test-repo-01', 'test-repo-2']
     steps:
-      - run: |
-          curl -X POST \
-          -H "Authorization: Bearer ${{secrets.ACTIONS_KEY}}" \
-          -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/HarryKayNeezy/test-repo-02/github/workflows/deploy.yml/dispatches \
-          -d '{"ref": "master"}'
+    - uses: passeidireto/trigger-external-workflow-action@main
+      env:
+        PAYLOAD_REBUILD: "false"
+        PAYLOAD_BRANCH: ${{github.ref}}
+      with:
+        repository: HarryKayNeezy/${{ matrix.repo }}
+        event: update
+        github_pat: ${{ secrets.ACTIONS_KEY }}
