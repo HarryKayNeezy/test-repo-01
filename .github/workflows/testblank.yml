@@ -8,7 +8,7 @@ jobs:
       matrix:
         repo: ['https://github.com/HarryKayNeezy/test-repo-01', 'https://github.com/HarryKayNeezy/test-repo-02']
     steps:
-    - uses: HarryKayNeezy/test-repo-01@main
+    - uses: HarryKayNeezy/test-repo-01@master
       env:
         PAYLOAD_REBUILD: "false"
         PAYLOAD_BRANCH: ${{github.ref}}
