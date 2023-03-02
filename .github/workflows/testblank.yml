@@ -6,7 +6,7 @@ jobs:
     name: "Notify about update"
     strategy:
       matrix:
-        repo: ['HarryKayNeezy/test-repo-01', 'HarryKayNeezy/test-repo-02']
+        repo: ['https://github.com/HarryKayNeezy/test-repo-01', 'https://github.com/HarryKayNeezy/test-repo-02']
     steps:
     - uses: HarryKayNeezy/trigger-external-workflow-action@main
       env:
