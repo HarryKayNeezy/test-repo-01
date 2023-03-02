@@ -1,18 +1,22 @@
-on: [push, workflow_dispatch]
-name: 'Trigger new update'
+name: Dispatcher
+on:
+  push:
+    branches: [master]
+
 jobs:
-  trigger:
+  dispatch:
+    name: Dispatch
+    env:
+      PACKAGES_TO_UPGRADE: ${{ needs.run_publish.outputs.packages }}
     runs-on: ubuntu-latest
-    name: "Notify about update"
     strategy:
       matrix:
-        repo: ['https://github.com/HarryKayNeezy/test-repo-01', 'https://github.com/HarryKayNeezy/test-repo-02']
+        repo: ['test-repo-01', 'test-repo-02']
+    timeout-minutes: 5
     steps:
-    - uses: HarryKayNeezy/test-repo-01@master
-      env:
-        PAYLOAD_REBUILD: "false"
-        PAYLOAD_BRANCH: ${{github.ref}}
-      with:
-        repository: HarryKayNeezy/${{ matrix.repo }}
-        event: update
-        github_pat: ${{ secrets.ACTIONS_KEY }}
+      - name: Dispatch to workflows
+        run: |
+            curl -H "Accept: application/vnd.github.everest-preview+json" \
+            -H "Authorization: token ${{ secrets.ACTIONS_KEY }}" \
+            --request POST \
+            --data '{"event_type": "some_event", "client_payload": { "foo": "bar" }}' https://api.github.com/repos/${{ matrix.repo }}/dispatches
