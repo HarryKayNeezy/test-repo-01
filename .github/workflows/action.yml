@@ -2,7 +2,7 @@ name: Dispatcher
 on:
   push:
     branches: [master]
-  path:
+    paths:
     - action.yml
 
 jobs:
